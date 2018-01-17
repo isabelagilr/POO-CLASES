@@ -1,0 +1,108 @@
+// clasesssss1raclase.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+#include "stdio.h"
+#include "math.h"
+
+using namespace std;
+
+class punto
+{
+private:
+	int x;
+	int y;
+public:
+	punto() //si o si el contructor primero
+	{
+		x=0;
+		y=0;
+	}
+	void setx(int a) //siempre oner un set y un get para cada atributo
+	{
+		x=a;
+	}
+	void sety(int b)
+	{
+		y=b;
+	}
+	int getx()
+	{	
+		return x;
+	}
+	int gety() //no le entra nada de parametro
+	{
+		return y;
+	}
+	void mostrarcuadrante() //si no lo programo aqui va punto y coma al final void mostrarcuadrante();
+	{
+		if(x==0&&y==0)
+			cout<<"ESTA EN EL ORIGEN"<<endl;
+		if(x>0&&y>0)
+			cout<<"ESTA EN EL PRIMER CUADRANTE"<<endl;
+		if(x<0&&y<0)
+			cout<<"ESTA EN EL TERCER CUADRANTE"<<endl;
+		if(x>0&&y<0)
+			cout<<"ESTA EN EL CUARTO CUADRANTE"<<endl;
+		if(x<0&&y>0)
+			cout<<"ESTA EN EL SEGUNDO CUADRANTE"<<endl;
+	}
+	float distancia()
+	{
+		float distancia;
+		distancia=sqrt(powf(x,2)+powf(y,2)); //puedo hacer con gext(), gety() o solo x,y PQ SOLO TIENE UN PUNTO.
+		return distancia;
+	}
+	double distancia2puntos(punto p2) //va con parametro pq aparte del primer punto que va a ir p1.distancia2puntos(p2) necesita los datos del otro
+	{                                  //SI O SI PARA LLAMAR X,Y ES CON GET AMBOS PUNTOS PQ SON MAS DE 1.
+		double a,b;
+		a=p2.getx()-getx(); //el p2 si.getx() si necesito el p2, pero para el p1 no, solo getx() sin p1 PQ ESE ES EL QUE YA ASUME
+		b=p2.gety()-gety();
+
+		return sqrt((a*a)+(b*b));
+	}
+	bool vertical(punto p2) //verificar que dos puntos forman una vertical
+	{
+		if(getx()==p2.getx())
+			return true;
+		else
+			return false;
+	}
+}; 
+
+
+void main()
+{
+	int a1,a2,b1,b2;
+	float dist;
+	punto p1,p2;
+	cout<<"punto 1 "<<endl;
+	cout<<"x="; 
+	cin>>a1;
+	p1.setx(a1);
+	cout<<"y=";
+	cin>>b1;
+	p1.sety(b1);
+	cout<<"punto 2 "<<endl;
+	cout<<"x="; 
+	cin>>a2;
+	p2.setx(a2);
+	cout<<"y=";
+	cin>>b2;
+	p2.sety(b2);
+	p1.mostrarcuadrante();//no le manda nada pero como dice p1.mostrarcuadrante() el p1. le esta mandando ya su info es decir x,y
+	cout<<"distancia de punto al origen"<<endl;
+	dist=p1.distancia();
+	cout<<dist<<endl;
+	double d=p1.distancia2puntos(p2);
+	cout<<"la distancia entre p1 y p2 es"<<d<<endl;
+	if(p1.vertical(p2))
+		cout<<"SI FORMA UNA RECTA VERTICAL"<<endl;
+	else
+		cout<<"NO FORMA UNA RECTA VERTICAL"<<endl;
+	
+	getch();
+}
