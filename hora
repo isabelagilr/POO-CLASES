@@ -127,6 +127,7 @@ void aumentarXseg(int segundos) //si quisiera aumentar mas de un seg, le mando c
 
 void main()
 {
+	int segundosaumentar;
 	Hora hora1,hora2,hora3;
 	/*
 	SIN LAS FUNCIONES ES ASI
@@ -152,7 +153,9 @@ void main()
 	cout<<"hora actual"<<endl;
 	hora1.mostrarHora();
 	cout<<"hora con un segundo aumentado"<<endl;
-	hora1.aumentarXseg(120);
+	cout<<"ingrese cuantos segundos aumentar"<<endl;
+	cin>>segundosaumentar;
+	hora1.aumentarXseg(segundosaumentar);
 	hora1.mostrarHora();
 	/*cout<<"----------HORA 2-----------"<<endl;
 	hora2.leerHora();
