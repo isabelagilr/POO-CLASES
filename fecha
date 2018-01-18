@@ -1,0 +1,140 @@
+// fecha.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+using namespace std;
+const int DiaMes[13]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+class fecha
+{
+private:
+	int dia;
+	int mes;
+	int anio;
+public:
+	fecha()
+	{
+		dia=0;
+		mes=0;
+		anio=0;
+	}
+void setDia(int a)
+{
+	dia=a;
+}
+int getDia()
+{
+	return dia;
+}
+void setMes(int b)
+{
+	mes=b;
+}
+int getMes()
+{
+	return mes;
+}
+void setAnio(int c)
+{
+	anio=c;
+}
+int getAnio()
+{
+	return anio;
+}
+void leer()
+{
+	int d,m,a;
+	do{
+	cout<<"ingrese anio"<<endl;
+	cin>>a;
+	anio=a;
+	}while(anio<0);
+	do{
+	cout<<"ingrese mes"<<endl;
+	cin>>m;
+	mes=m;
+	}while(mes>12);
+	do{
+	cout<<"ingrese dia"<<endl;
+	cin>>d;
+	dia=d;
+	}while(dia>DiaMes[mes]);
+}
+void mostrar()
+{
+	cout<<dia<<"/"<<mes<<"/"<<anio<<endl;
+}
+void manana()
+{
+	dia=dia+1;
+	if(dia>DiaMes[mes]&&mes<12)
+	{
+		mes=mes+1;
+		dia=1;
+	}
+	if(dia>DiaMes[mes]&&mes==12)
+	{
+		anio=anio+1;
+		mes=1;
+		dia=1;
+	}
+}
+void diferencia(fecha f1, fecha f2)
+{
+	int d1,m1,a1,d2,m2,a2,d3,m3,fecha1,fecha2,dif,d,m,a;
+	d1=f1.getDia();
+	d2=f2.getDia();
+	m1=f1.getMes();
+	m2=f2.getMes();
+	a1=f1.getAnio();
+	a2=f2.getAnio();
+	fecha1=d1+(m1*30)+(a1*365);
+	fecha2=d2+(m2*30)+(a2*365);
+	dif=fecha2-fecha1;
+	a=dif/365;
+	m=(dif%365)/30;
+	d=(dif%365)%30;
+	setDia(d);
+	setMes(m);
+	setAnio(a);
+}
+
+}; //end class
+
+void main()
+{
+	fecha f1,f2,f3;
+	cout<<"ingrese la primera fecha"<<endl;
+	f1.leer();
+	f1.mostrar();
+	cout<<endl;
+	cout<<endl;
+	cout<<"--------------------------------"<<endl;
+	cout<<"ingrese la segunda fecha"<<endl;
+	f2.leer();
+	f2.mostrar();
+	cout<<endl;
+	cout<<endl;
+	cout<<"--------------------------------"<<endl;
+	cout<<"FECHA 1 MAS UN DIA"<<endl;
+	f1.manana();
+	f1.mostrar();
+	cout<<endl;
+	cout<<endl;
+	cout<<"--------------------------------"<<endl;
+	cout<<"LA DIFERENCIA DE FECHAS ES:"<<endl;
+	f3.diferencia(f1,f2);
+	f3.mostrar();
+	cout<<endl;
+	cout<<endl;
+	cout<<"--------------------------------"<<endl;
+	getch();
+
+}
+
+
