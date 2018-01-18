@@ -1,0 +1,117 @@
+// menorCercano.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include "stdio.h"
+
+using namespace std;
+
+class recta
+{
+private:
+
+	int x1;
+	int x2;
+	int y1;
+	int y2;
+
+public:
+	recta()
+	{
+		x1=0;
+		x2=0;
+		y1=0;
+		y2=0;
+	}
+void setX1(int a)
+{
+	x1=a;
+}
+int getX1()
+{
+	return x1;
+}
+void setX2(int b)
+{
+	x2=b;
+}
+int getX2()
+{
+	return x2;
+}
+void setY1(int c)
+{
+	y1=c;
+}
+int getY1()
+{
+	return y1;
+}
+void setY2(int d)
+{
+	y2=d;
+}
+int getY2()
+{
+	return y2;
+}
+void leer()
+{
+	cout<<"INGRESE LOS PUNTOS DE LA RECTA"<<endl;
+	cout<<"x1= "; cin>>x1;
+	cout<<"x2= "; cin>>x2;
+	cout<<"y1= "; cin>>y1;
+	cout<<"y2= "; cin>>y2;
+}
+void mostrar()
+{
+	cout<<"Primer punto : ("<<x1<<","<<y1<<")"<<endl;
+	cout<<"Segundo punto : ("<<x2<<","<<y2<<")"<<endl;
+}
+float pendiente()
+{
+	float m;
+	m=(y2-y1)/(x2-x1);
+	return m;
+}
+
+void paralela(recta r2)
+{
+	float m1,m2;
+	m1=pendiente();
+	m2=r2.pendiente();
+	if(m1==m2)
+		cout<<"SON PARALELAS"<<endl;
+	else
+		cout<<"NO SON PARALELAS"<<endl;
+
+}
+
+}; //end class
+void main()
+{
+	recta r1,r2;
+	cout<<"PRIMERA recta: "<<endl;
+	r1.leer();
+	cout<<"-------------------------------"<<endl;
+	cout<<"SUS PUNTOS SON"<<endl;
+	r1.mostrar();
+	cout<<"-------------------------------"<<endl;
+	cout<<"SEGUNDA recta: "<<endl;
+	r2.leer();
+	cout<<"-------------------------------"<<endl;
+	cout<<"SUS PUNTOS SON"<<endl;
+	r2.mostrar();
+	cout<<"-------------------------------"<<endl;
+	cout<<"la pendiente de la recta 1 es: "<<r1.pendiente()<<endl;
+	cout<<"-------------------------------"<<endl;
+	cout<<"la pendiente de la recta 2 es: "<<r2.pendiente()<<endl;
+	cout<<"-------------------------------"<<endl;
+	cout<<"son paralelas las rectas ?"<<endl;
+	r1.paralela(r2);
+	cout<<"-------------------------------"<<endl;
+
+	getch();
+}
