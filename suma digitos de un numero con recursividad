@@ -1,0 +1,65 @@
+// fraccion.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+
+using namespace std;
+
+class Numero
+{
+private:
+	int valor;
+	int suma(int num)
+	{
+		if(num<10)
+			return num;
+		else
+		{
+			int s=suma(num/10);
+			return s + num % 10;
+		}
+	}
+public:
+	Numero()
+	{
+		valor=0;
+	}
+void setValor(int a)
+{
+	valor=a;
+}
+int getValor()
+{
+	return valor;
+}
+void leer()
+{
+	cout<<"ingrese el valor: ";
+	cin>>valor;
+}
+void mostrar()
+{
+	cout<<valor;
+}
+
+int sumar();
+
+}; //endl class
+
+int Numero::sumar()
+{
+	return suma(valor);
+}
+	
+void main()
+{
+	Numero n1;
+	n1.leer();
+	int s=n1.sumar();
+	cout<<"la suma es:"<<endl;
+	cout<<s;
+	getch();
+}
