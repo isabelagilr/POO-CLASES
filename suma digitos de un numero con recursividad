@@ -59,7 +59,7 @@ void main()
 	Numero n1;
 	n1.leer();
 	int s=n1.sumar();
-	cout<<"la suma es:"<<endl;
+	cout<<"la suma de sus digitos es:"<<endl;
 	cout<<s;
 	getch();
 }
