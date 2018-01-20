@@ -1,0 +1,138 @@
+// horaexpo.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "conio.h"
+#include <iostream>
+#include "stdio.h"
+
+using namespace std;
+
+class Hora
+{
+private:
+
+	int hra;
+	int seg;
+	int min;
+
+public:
+
+	Hora()
+	{
+		hra=0;
+		seg=0;
+		min=0;
+	}
+	void setHra(int h) //insertores
+	{
+		hra=h;
+	}
+	void setMin(int m)
+	{
+		min=m;
+	}
+	void setSeg(int s)
+	{
+		seg=s;
+	}
+	int getHra() //extractores
+	{
+		return hra;
+	}
+	int getSeg()
+	{
+		return seg;
+	}
+	int getMin()
+	{
+		return min;
+	}
+	void leerHora()
+	{
+	int h,s,m;
+	cout<<"ingrese hora: ";
+	cin>>h;
+	hra=h;
+	cout<<"ingrese minutos: ";
+	cin>>m;
+	min=m;
+	cout<<"ingrese segundos: ";
+	cin>>s;
+	seg=s;
+
+	}
+	void mostrarHora()
+	{
+	cout<<hra<<":"<<min<<":"<<seg<<endl; 
+	}
+
+	void aumentar1seg() 
+	{
+		seg++;
+		if(seg==60)
+		{
+			min=min+1;
+			seg=0;
+			if(min==60)
+			{
+				min=0;
+				hra=hra+1;
+				if(hra==24)
+				hra=0;
+			}
+		}
+	}
+
+	void aumentarXseg(int segundos) //si quisiera aumentar mas de un seg, le mando como parametro un int seg para ahi mandar cuantos segundos aumentar
+	{
+		int i=0;
+		while(i<segundos)
+		{	seg++;
+			if(seg==60)
+			{
+				min=min+1;
+				seg=0;
+				if(min==60)
+				{
+					min=0;
+					hra=hra+1;
+					if(hra==24)
+					hra=0;
+				}
+			}
+			i++;
+		}
+	}
+
+}; //end class
+
+void main()
+{
+	int segundosaumentar;
+	Hora hora1,hora2;
+
+	cout<<"----------HORA 1-----------"<<endl;
+	hora1.leerHora();
+	cout<<endl;
+	cout<<"hora actual"<<endl;
+	hora1.mostrarHora();
+	cout<<endl;
+	cout<<"hora con un segundo aumentado"<<endl;
+	hora1.aumentar1seg();
+	hora1.mostrarHora();
+	cout<<endl;
+	cout<<endl;
+	cout<<"----------HORA 2-----------"<<endl;
+	hora2.leerHora();
+	cout<<endl;
+	cout<<"hora actual"<<endl;
+	hora2.mostrarHora();
+	cout<<endl;
+	cout<<"ingrese cuantos segundos aumentar"<<endl;
+	cin>>segundosaumentar;
+	hora2.aumentarXseg(segundosaumentar);
+	hora2.mostrarHora();
+	
+	getch();
+}
