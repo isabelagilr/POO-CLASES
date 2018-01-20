@@ -1,0 +1,235 @@
+// fraccion.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "stdlib.h"
+
+using namespace std;
+
+class Fraccion
+{
+private:
+	int num;
+	int den;
+public:
+	Fraccion()
+	{
+		num=1;
+		den=1;
+	}
+void setNum(int a)
+{
+	num=a;
+}
+void setDen(int b)
+{
+	den=b;
+}
+int getNum()
+{
+	return num;
+}
+int getDen()
+{
+	return den;
+}
+void leer()
+{
+	cout<<"ingrese el numerador: ";
+	cin>>num;
+	cout<<"ingrese el denominador: ";
+	cin>>den;
+}
+void mostrar()
+{
+	cout<<num<<"/"<<den<<endl;
+}
+
+void simplificar();
+void suma(Fraccion f1, Fraccion f2);
+void multiplicar(Fraccion f1, Fraccion f2);
+void dividir(Fraccion f1, Fraccion f2);
+
+}; //endl class
+
+void Fraccion::simplificar()
+{
+	int i=2;
+	while(i<=num&&i<=den)
+	{
+		if(num%i==0&&den%i==0)
+		{
+			num=num/i;
+			den=den/i;
+		}
+		else
+			i++;
+	}
+}
+
+void Fraccion::suma(Fraccion f1, Fraccion f2)
+{
+	int num1, num2, den1, den2,num3, den3;
+	num1=f1.getNum();
+	num2=f2.getNum();
+	den1=f1.getDen();
+	den2=f2.getDen();
+
+	den3=den1*den2;
+	num3=((den3/den1)*num1)+((den3/den2)*num2);
+	
+	setNum(num3);
+	setDen(den3);
+
+}
+
+void Fraccion::multiplicar(Fraccion f1, Fraccion f2)
+{
+	int num1, num2, den1, den2,num3, den3;
+	num1=f1.getNum();
+	num2=f2.getNum();
+	den1=f1.getDen();
+	den2=f2.getDen();
+
+	den3=den1*den2;
+	num3=num1*num2;
+
+	setNum(num3);
+	setDen(den3);
+
+}
+
+void Fraccion::dividir(Fraccion f1, Fraccion f2)
+{
+	int num1, num2, den1, den2,num3, den3;
+	num1=f1.getNum();
+	num2=f2.getNum();
+	den1=f1.getDen();
+	den2=f2.getDen();
+
+	den3=num1*den2;
+	num3=den1*num2;
+
+	setNum(num3);
+	setDen(den3);
+
+}
+
+
+void main()
+{
+	Fraccion f1,f2,f3,f4,f5;
+	int op;
+
+	do{
+		cout<<"      MENU"<<endl;
+		cout<<"(1) simplificar F1"<<endl;
+		cout<<"(2) sumar F1 y F2"<<endl;
+		cout<<"(3) multiplicar F1 y F2"<<endl;
+		cout<<"(4) dividir F1 y F2"<<endl;
+		cout<<"(0) SALIR"<<endl;
+		cout<<endl;
+		cout<<endl;
+		cout<<"ingrese una opcion"<<endl;
+		cin>>op;
+		cout<<endl;
+
+		switch(op)
+		{
+			case 1:
+			{
+				cout<<"INGRESE DATOS DE F1"<<endl;
+				f1.leer();
+				cout<<"-------------------------------"<<endl;
+				f1.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<"SIMPLIFICADO"<<endl;
+				f1.simplificar();
+				cout<<"-------------------------------"<<endl;
+				f1.mostrar();
+				cout<<"-------------------------------"<<endl;
+			}
+
+			case 2:
+			{
+				cout<<"INGRESE DATOS DE F1"<<endl;
+				f1.leer();
+				cout<<"-------------------------------"<<endl;
+				f1.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<"INGRESE DATOS DE F2"<<endl;
+				f2.leer();
+				cout<<"-------------------------------"<<endl;
+				f2.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<endl;
+				cout<<endl;
+				cout<<"SUMA DE F1 Y F2"<<endl;
+				f3.suma(f1,f2);
+				cout<<"-------------------------------"<<endl;
+				f3.simplificar();
+				f3.mostrar();
+				cout<<"-------------------------------"<<endl;
+			}
+
+			case 3:
+			{
+				cout<<"INGRESE DATOS DE F1"<<endl;
+				f1.leer();
+				cout<<"-------------------------------"<<endl;
+				f1.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<"INGRESE DATOS DE F2"<<endl;
+				f2.leer();
+				cout<<"-------------------------------"<<endl;
+				f2.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<endl;
+				cout<<endl;
+				cout<<"MULTIPLICACION DE F1 Y F2"<<endl;
+				f4.multiplicar(f1,f2);
+				cout<<"-------------------------------"<<endl;
+				f4.simplificar();
+				f4.mostrar();
+				cout<<"-------------------------------"<<endl;
+
+			}
+
+			case 4:
+			{
+
+				cout<<"INGRESE DATOS DE F1"<<endl;
+				f1.leer();
+				cout<<"-------------------------------"<<endl;
+				f1.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<"INGRESE DATOS DE F2"<<endl;
+				f2.leer();
+				cout<<"-------------------------------"<<endl;
+				f2.mostrar();
+				cout<<"-------------------------------"<<endl;
+				cout<<endl;
+				cout<<endl;
+				cout<<"DIVISION DE F1 Y F2"<<endl;
+				f5.dividir(f1,f2);
+				cout<<"-------------------------------"<<endl;
+				f5.simplificar();
+				f5.mostrar();
+				cout<<"-------------------------------"<<endl;
+
+			}
+
+			default:
+			{
+				cout<<"NO ES UNA OPCION"<<endl;
+				break;
+			}
+
+		}
+
+	}while(op!=0);
+
+	getch();
+}
