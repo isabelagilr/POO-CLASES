@@ -1,0 +1,49 @@
+// numerosss.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+using namespace std;
+
+class numero
+{
+private: 
+	int num;
+	int sumar(int x)
+	{
+		if(x<10)
+			return x;
+		else
+		{
+			int s=sumar(x/10);
+			return s+x%10;
+		}
+	}
+public:
+	void setNum(int a)
+	{
+		num=a;
+	}
+	int getNum()
+	{
+		return num;
+	}
+	int suma()
+	{
+		return sumar(num);
+	}
+
+};
+
+void main()
+{
+	int a;
+	numero n1;
+	cout<<"ingrse el numeroooooooo";
+	cin>>a;
+	n1.setNum(a);
+	cout<<n1.suma();
+	getch();
+
+}
