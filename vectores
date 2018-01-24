@@ -1,0 +1,233 @@
+// clase vectores.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+typedef int tipoElem; //para poder camiar el tipo de dato del vector
+const int MAX=50;
+
+class vector
+{
+private:
+	tipoElem v[MAX];
+	int n;
+public:
+	vector()
+	{
+		n=0;
+	}
+	void setElem(tipoElem x, int p) //el elemento de tipoElem se pone en la pos p
+	{
+		v[p]=x;
+	}
+	tipoElem getElem(int p) //me devuelve el elemento de tipoElem de la pos p
+	{
+		return v[p];
+	}
+	void setDim(int a)
+	{
+		n=a;
+	}
+	int getDim()
+	{
+		return n;
+	}
+	void leer();
+	void imprimir();
+	/*bool vacio()
+	{return n==0;}
+	bool lleno()
+	{return n==MAX;}
+	*/
+	bool vacio()
+	{
+		if(n==0)
+			return true;
+		else
+			return false;
+	}
+	bool lleno()
+	{
+		if(n==50)
+			return true;
+		else
+			return false;
+	}
+	void insertar(tipoElem x, int p);
+	void eliminar(int p);
+	void insertarUltimo(tipoElem x);
+	void insertarPrimero(tipoElem x);
+	void eliminarUltimo();
+	void eliminarPrimero();
+	void eliminarDuplicados();
+	void eliminarNoDuplicados();
+	void interseccion(vector v1, vector v2);
+
+}; //end class
+
+void vector::leer()
+{
+	int m;
+	cout<<"cantidad de elementos: ";
+	cin>>m;
+	int x;
+	for(int i=0;i<m;i++)
+	{
+		cout<<"v["<<i+1<<"]= ";
+		cin>>x;
+		insertarUltimo(x);
+	}
+}
+void vector::imprimir()
+{
+	int i=0;
+	while(i<getDim())
+	{
+		cout<<getElem(i)<<" ";
+		i++;
+	}
+}
+
+void vector::insertar(tipoElem x, int p)
+{
+	if(p<0||p>n)
+	{
+		cout<<"posicion no valida"<<endl;
+		return ;
+	}
+	if(lleno())
+	{
+		cout<<"vector lleno"<<endl;
+		return ;
+	}
+	int k=n-1;
+	while(k>=p)
+	{
+		v[k+1]=v[k];
+		k--;
+	}
+	v[p]=x;
+	n=n+1;
+}
+
+void vector::eliminar(int p)
+{
+	if(p<0||p>n)
+	{
+		cout<<"posicion no valida"<<endl;
+		return ;
+	}
+	if(vacio())
+	{
+		cout<<"vector vacio"<<endl;
+		return ;
+	}
+	int k=p+1;
+	while(k<n)
+	{
+		v[k-1]=v[k];
+		k++;
+	}
+	n=n-1;
+
+}
+
+void vector::insertarUltimo(tipoElem x)
+{
+	insertar(x,n);
+}
+void vector::insertarPrimero(tipoElem x)
+{
+	insertar(x,0);
+}
+void vector::eliminarUltimo()
+{
+	eliminar(n-1);
+}
+void vector::eliminarPrimero()
+{
+	eliminar(0);
+}
+void vector::eliminarDuplicados()
+{
+	int i=0;
+	int j=1;
+	while(i<n)
+	{
+		while(j<n)
+		{
+			if(v[i]==v[j])
+				eliminar(j);
+			else
+				j++;
+		}
+		i++;
+		j=i+1;
+	}
+}
+void vector::eliminarNoDuplicados()
+{
+	
+}
+
+void vector::interseccion(vector v1, vector v2)
+{
+	setDim(v1.getDim() + v2.getDim());
+	for(int i=0;i<(v1.getDim());i++)
+	{
+		for(int j=0;j<v2.getDim();j++)
+		{
+			if(v1.getElem(i)==v2.getElem(j))
+			{
+				setElem()
+			}
+		}
+	}
+}
+
+void main()
+{
+	int p,p2;
+	tipoElem x,x2;
+	vector v1,v2,v3;
+	
+	cout<<"VECTOR 1"<<endl;
+	v1.leer();
+	cout<<endl;
+	v1.imprimir();
+	cout<<endl;
+	cout<<"ingrese que numero quiere aumentar"<<endl;
+	cin>>x;
+	cout<<"ingrese en que posicion desea insertar el numero"<<endl;
+	cin>>p;
+	v1.insertar(x,p);
+	cout<<endl;
+	v1.imprimir();
+	cout<<endl;
+	
+	cout<<"VECTOR 2"<<endl;
+	v2.leer();
+	cout<<endl;
+	v2.imprimir();
+	cout<<endl;
+	v2.eliminarDuplicados();
+	v2.imprimir();
+	cout<<endl;
+	cout<<"ingrese la posicion que quiere eliminar"<<endl;
+	cin>>p2;
+	v2.eliminar(p2);
+	cout<<endl;
+	v2.imprimir();
+	v3.interseccion(v1,v2);
+	getch();
+	//y asi puedo implementar eliminar ultimo,etc...
+}
+
+//eliminarRepetidos
+//eliminar no repetidos
+
+
