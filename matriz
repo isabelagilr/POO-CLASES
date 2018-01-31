@@ -1,0 +1,46 @@
+// matriz.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+const int MAX=50;
+
+class matriz
+{
+private:
+	int mat[MAX][MAX];
+	int fil;
+	int col;
+public:
+	matriz()
+	{
+		fil=col=0;
+	}
+	void setElem(int a, int i, int j)
+	{
+		mat[i][j]=a;
+	}
+	void setFil(int a)
+	{
+		fil=a;
+	}
+	void setCol(int b)
+	{
+		col=b;
+	}
+	int getElem(int i, int j)
+	{
+		return mat[i][j];
+	}
+	int getFil()
+	{
+		return fil;
+	}
+	int getCol()
+	{
+		return col;
+	}
+};
