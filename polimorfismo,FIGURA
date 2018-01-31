@@ -1,0 +1,157 @@
+//figura.h
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+
+using namespace std;
+
+class figura
+{
+private:
+	int numero;
+	int cantLados;
+public:
+	figura()
+	{
+		numero=cantLados=0;
+	}
+	void setNumero(int a)
+	{
+		numero=a;
+	}
+	void setCantLados(int b)
+	{
+		cantLados=b;
+	}
+	int getNumero()
+	{
+		return numero;
+	}
+	int getCantLados()
+	{
+		return cantLados;
+	}
+	void leer()
+	{
+		float num,cant;
+		cout<<"ingrese numero: ";
+		cin>>num;
+		setNumero(num);
+		cout<<"ingrese Cantidad de lados: ";
+		cin>>cant;
+		setCantLados(cant);
+	}
+};
+
+
+//cuadrado, triangulo cpp
+// figura.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include "conio.h"
+#include "figura.h"
+
+using namespace std;
+
+class triangulo:public figura
+{
+private:
+	float base;
+	float altura;
+public:
+	triangulo()
+	{
+		base=altura=0;
+	}
+	void setBase(int a)
+	{
+		base=a;
+	}
+	void setAltura(int b)
+	{
+		altura=b;
+	}
+	int getBase()
+	{
+		return base;
+	}
+	int getAltura()
+	{
+		return altura;
+	}
+	void leer()
+	{
+		float bas,alt;
+		figura::leer();
+		cout<<"ingrese base: ";
+		cin>>bas;
+		setBase(bas);
+		cout<<"ingrese altura: ";
+		cin>>alt;
+		setAltura(alt);
+		cout<<endl;
+	}
+	float area()
+	{
+		float area;
+		area=(base*altura)/2;
+		return area;
+	}
+};
+
+class cuadrado:public figura
+{
+private:
+	float lado;
+public:
+	cuadrado()
+	{
+		lado=0;
+	}
+	void setLado(int a)
+	{
+		lado=a;
+	}
+	
+	int getBase()
+	{
+		return lado;
+	}
+	void leer()
+	{
+		float lad;
+		figura::leer();
+		cout<<"ingrese lado: ";
+		cin>>lad;
+		setLado(lad);
+	}
+
+	float area()
+	{
+		float area;
+		area=lado*lado;
+		return area;
+	}
+};
+
+void main()
+{
+	cuadrado c1;
+	triangulo t1;
+	cout<<"ingrese cuadrado"<<endl;
+	c1.leer();
+	cout<<"ingrese triangulo"<<endl;
+	t1.leer();
+	float areaTri, areaCua;
+	areaTri=t1.area();
+	areaCua=c1.area();
+	cout<<"el area del triangulo es: ";
+	cout<<endl<<areaTri;
+	cout<<endl;
+	cout<<"el area del cuadrado es: ";
+	cout<<endl<<areaCua;
+	getch();
+}
