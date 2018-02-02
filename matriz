@@ -1,17 +1,16 @@
-// matriz.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include <iostream>
 #include "conio.h"
+#include "stdlib.h"
+#include "stdio.h"
+
+const int MAX=50; 
 
 using namespace std;
-const int MAX=50;
-
 class matriz
 {
 private:
-	int mat[MAX][MAX];
+	float mat[MAX][MAX];
 	int fil;
 	int col;
 public:
@@ -19,9 +18,9 @@ public:
 	{
 		fil=col=0;
 	}
-	void setElem(int a, int i, int j)
+	void setElem(float a, int ii, int jj)
 	{
-		mat[i][j]=a;
+		mat[ii][jj]=a;
 	}
 	void setFil(int a)
 	{
@@ -31,9 +30,9 @@ public:
 	{
 		col=b;
 	}
-	int getElem(int i, int j)
+	float getElem(int ii, int jj)
 	{
-		return mat[i][j];
+		return mat[ii][jj];
 	}
 	int getFil()
 	{
@@ -43,4 +42,222 @@ public:
 	{
 		return col;
 	}
+void leer()
+{
+	cout<<"ingrese filas"<<endl;
+	cin>>fil;
+	cout<<"ingrese columna"<<endl;
+	cin>>col;
+	int i,j;
+	for(i=0;i<fil;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			cout<<"mat["<<i+1<<"]["<<j+1<<"]= ";
+			cin>>mat[i][j];
+		}
+	}
+}
+void mostrar()
+{
+	int i,j;
+	for(i=0;i<fil;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			cout<<mat[i][j]<<"   ";
+		}
+	cout<<endl;
+	}
+}
+void sumar(matriz A, matriz B);
+void transpuesta(matriz A);
+void multiplicar(matriz A, matriz B);
+bool verificarMagica();
+float promedio();
+float mayorElem();
+
 };
+
+float matriz::mayorElem()
+{
+	int i,j;
+	float may=getElem(0,0),aux;
+	for(i=0;i<fil;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			if(getElem(i,j)>may)
+			{
+				may=getElem(i,j);
+			}
+		}
+	}
+	return may;
+
+}
+float matriz::promedio()
+{
+	float sum=0,i,j;
+
+	for(i=0;i<fil;i++)
+	{
+		for(j=0;j<col;j++)
+		{
+			sum=sum+getElem(i,j);
+		}
+	}
+	return (sum/(fil*col));
+}
+bool matriz::verificarMagica()
+{
+	int i,j,v[50],k=0,tamv=0;
+
+	for(i=0;i<fil;i++)
+	{
+		v[k]=0;
+		for(j=0;j<col;j++)
+		{
+			v[k]=v[k]+getElem(i,j);
+		}
+		k++;
+		tamv++;
+	}
+
+	for(i=0;i<fil;i++)
+	{
+		v[k]=0;
+		for(j=0;j<col;j++)
+		{
+			v[k]=v[k]+getElem(j,i);
+		}
+		k++;
+		tamv++;
+	}
+
+	for(int h=0;h<tamv;h++)
+	{
+		if(v[h]==v[h+1])
+			return true;
+		else
+			return false;
+	}
+
+}
+void matriz::transpuesta(matriz A)
+{
+	int i,j;
+	float a;
+
+	setFil(A.getCol());
+	setCol(A.getFil());
+
+	for(i=0;i<getFil();i++)
+	{
+		for(j=0;j<getCol();j++)
+		{
+			a=A.getElem(j,i);
+			setElem(a,i,j);
+		}
+	cout<<endl;
+	}
+}
+void matriz::sumar(matriz A, matriz B)
+{
+	int i,j;
+	float a;
+	if(A.getFil()==B.getFil() && A.getCol()==B.getCol())
+	{	setFil(A.getFil());
+		setCol(A.getCol());
+		for(i=0;i<getFil();i++)
+		{
+			for(j=0;j<getCol();j++)
+			{
+				a=(A.getElem(i,j)+B.getElem(i,j));
+				setElem(a,i,j);
+
+			}
+		}
+	}
+	else
+	{
+		cout<<"no se puede realiza, las matrices deben ser de la misma orden"<<endl;
+	}
+}
+
+void matriz::multiplicar(matriz m1, matriz m2)
+{
+		int sum=0;
+		if(m1.getCol()==m2.getFil())
+		{
+			setFil(m1.getFil());
+			setCol(m2.getCol());
+			int x=m1.getCol();
+
+			for(int i=0;i<getFil();i++)
+			{
+				for(int j=0;j<getCol();j++)
+				{
+					sum=0;
+					for(int k=0;k<x;k++)
+					{
+						sum=sum+(m1.getElem(i,k)*m2.getElem(k,j));
+						setElem(sum,i,j);
+					}
+					
+				}
+			}
+		}
+		else
+		{
+			cout<<"no se puede multiplicar estas matrices"<<endl;
+		}
+}
+
+void main()
+{
+	matriz mat1,mat2, mat3, mat4, mat5;
+	cout<<"MATRIZ 1"<<endl;
+	mat1.leer();
+	cout<<endl;
+	mat1.mostrar();
+	cout<<"MAYOR ELEMENTO DE MATRIZ 1"<<endl;
+	float may;
+	may=mat1.mayorElem();
+	cout<<may<<endl;
+	cout<<"MATRIZ 2"<<endl;
+	mat2.leer();
+	cout<<endl;
+	mat2.mostrar();
+	cout<<"SUMA DE MATRICES 1, 2"<<endl;
+	mat3.sumar(mat1,mat2);
+	cout<<endl;
+	mat3.mostrar();
+	cout<<"TRANSPUESTA DE LA MATRIZ 2"<<endl;
+	mat4.transpuesta(mat2);
+	cout<<endl;	
+	mat4.mostrar();
+	cout<<"MULTIPLICAR MATRIZ 1 * MATRIZ 2"<<endl;
+	mat5.multiplicar(mat1,mat2);
+	cout<<endl;
+	mat5.mostrar();
+
+	cout<<"VERIFICAR SI MATRIZ 1 ES MAGICA"<<endl;
+
+	if(mat1.getFil()==mat1.getCol())
+	{
+		if(mat1.verificarMagica())
+			cout<<"ES MAGICA"<<endl;
+		else
+			cout<<"NO ES MAGICA"<<endl;
+	}
+	else
+		cout<<"la matiz debe se cuadrada para poder verificar si es magica"<<endl;
+
+	cout<<"PROMEDIO DE MATRIZ 1"<<endl;
+	float prom;
+	prom=mat1.promedio();
+	cout<<prom;
+	cout<<endl;
+	getch();
+}
